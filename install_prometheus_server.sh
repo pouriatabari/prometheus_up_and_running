@@ -10,4 +10,11 @@ cp prometheus-2.41.0.linux-amd64/prometheus.yml /etc/prometheus/prometheus.yml
 chown -R prometheus:prometheus /etc/prometheus/
 chown prometheus:prometheus /var/lib/prometheus/
 prometheus --config.file=/etc/prometheus/prometheus.yml
-cp ./services/prometheus.service /etc/systemd/prometheus.service
+cp /services/prometheus.service /etc/systemd/prometheus.service
+systemctl daemon-reload
+systemctl start prometheus
+systemctl enable prometheus
+netstat -ntlp | grep 9090
+firewall-cmd  --add-port=9090/tcp --permanent
+firewall-cmd --reload
+ntpdate ir.pool.ntp.org
