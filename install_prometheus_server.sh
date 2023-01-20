@@ -14,6 +14,7 @@ cp /services/prometheus.service /etc/systemd/prometheus.service
 systemctl daemon-reload
 systemctl start prometheus
 systemctl enable prometheus
+#curl localhost:9090/api/v1/status/config
 netstat -ntlp | grep 9090
 firewall-cmd  --add-port=9090/tcp --permanent
 firewall-cmd --reload
